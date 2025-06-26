@@ -1,2 +1,5 @@
 format: jb-book
-root: docs/format 
+root: docs/format
+
+chapters:
+  - file: docs/preprocess
