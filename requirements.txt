@@ -1,0 +1,5 @@
+jupyter-book
+pandas
+numpy
+seaborn
+plotly
