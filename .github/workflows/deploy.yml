@@ -1,0 +1,29 @@
+name: Build & Deploy Jupyter Book
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with: { python-version: '3.x' }
+
+      # Installeer alle packages uit requirements.txt
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Bouw het Jupyter Book (voert geen code uit dankzij execute: off)
+      - name: Build book
+        run: jupyter-book build .
+
+      # Deploy resultaat naar gh-pages branch
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_build/html
